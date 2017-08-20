@@ -55,8 +55,10 @@ class Yaml2Html(object):
             lstrip_blocks=True,
         )
 
+        htmls = [] 
         for elem in htmlmeta.elements:
             for elem_name, elem_value in elem.items():
                 template = '{0}.html'.format(elem_name)
-                print(env.get_template(template).render(elem))
+                htmls.append(env.get_template(template).render(elem))
 
+        return ''.join(htmls) 
