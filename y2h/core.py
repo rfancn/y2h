@@ -39,8 +39,11 @@ class Yaml2Html(object):
         try:
             with open(yaml_file, 'r') as f:
                 self.jsonret = yaml.load(f)
-        except:
-            raise
+        except Exception as ex:
+            print(ex)
+            return False
+
+        return True 
 
     def convert(self):
         htmlmeta = HtmlMeta(self.jsonret)
