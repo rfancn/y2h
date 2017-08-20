@@ -1,0 +1,23 @@
+{% set help_label=elem.label %}
+
+<div class="form-group">
+    {% if help_label %}
+    <label class="col-sm-3 control-label">{{ help_label.innertext }}</label>
+    {% else %}
+    <div class="col-sm-3"></div>
+    {% endif %}
+
+    <div class="col-sm-9">
+        {% for item in elem['items'] %}
+        <div class="checkbox">
+            <label>
+                {% if item.attribute %}
+                <input type="checkbox" {{ item.attribute }}>{{ item.label }}
+                {% else %}
+                <input type="checkbox">{{ item.label }}
+                {% endif %}
+            </label>
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,13 @@
+{% set help_label = elem.help_label %}
+
+<div class="form-group">
+    {% if help_label %}
+    <label for="{{ help_label.for }}">{{ help_label.innertext }}</label>
+    {% endif %}
+
+    {% if elem.attribute %}
+    <input class="form-control" {{ elem.attribute }}>
+    {% else %}
+    <input class="form-control">
+    {% endif %}
+</div>

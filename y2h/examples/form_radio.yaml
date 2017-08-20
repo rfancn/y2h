@@ -1,0 +1,23 @@
+elements:
+  - form: name="abc"
+    fieldset:
+      # no attribute, no items
+      - radio
+      # no attribute, multiple items but empty item
+      - radio:
+        items:
+          - item
+          - item
+      # with attribute, no items
+      - radio: name="radio1" help-label="radio label"
+      # with attribute, empty items
+      #- radio: name="radio2" y2h-label="radio label"
+      #  items:
+      #    - item:
+      #    - item:
+      # with attribute + normal items
+      - radio: name="radio3" help-label="消息加解密类型"
+        items:
+        - item: label="明文模式" name="msg_encrypt_method" v-model="method" value="clear" abc
+        - item: label="兼容模式" name="msg_encrypt_method" v-model="method" value="compatible"
+        - item: label="安全模式（推荐）" name="msg_encrypt_method" v-model="method" value="secure"

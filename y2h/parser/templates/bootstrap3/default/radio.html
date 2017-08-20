@@ -1,0 +1,18 @@
+{% set help_label=elem.help_label %}
+
+<div class="form-group">
+    {% if help_label %}
+    <label class="control-label">{{ help_label.innertext }}</label>
+    {% endif %}
+
+    {% for item in elem.items() %}
+    <div class="radio">
+      <label>
+            <input type="radio" {{ item.attribute }}>{ item.label }}
+      </label>
+    </div>
+    {% endfor %}
+</div>
+
+
+

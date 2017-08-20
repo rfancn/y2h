@@ -1,0 +1,17 @@
+elements:
+  - form: name="abc"
+    fieldset:
+      # simplest input without label
+      - input
+      # with label
+      - input: help-label="label input" name="input1"
+      # with single attribute
+      - input: required
+      # with both key-value attribute and single attribute
+      - input: type="password" disabled
+      # with specific key name which contains '-'
+      - input: aria-label="test"
+      # no quotes for attribute value
+      - input: type=text
+      # complex one
+      - input: help-label="input exmple" type=text a-b=xxx c-d-e="yyy" f-g-h-i=z required

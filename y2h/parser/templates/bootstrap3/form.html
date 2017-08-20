@@ -1,0 +1,16 @@
+{% set layout = form.layout %}
+
+{% if form.attribute %}
+<form {{ form.attribute }}>
+{% else %}
+<form>
+{% endif %}
+{% for widget in form.fieldset %}
+    {% for elem_type, elem in widget.items() %}
+       {% with elem = elem %}
+            {% include layout+"/"+elem_type + ".html" %}
+        {% endwith %}
+    {% endfor %}
+{% endfor %}
+
+</form>

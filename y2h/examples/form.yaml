@@ -1,0 +1,14 @@
+template: bootstrap3
+elements:
+  # non attribute and non fieldset
+  - form
+  # emtpy attribute and non fieldset
+  - form:
+  # emtpy attribute and empty fieldset
+  - form:
+    fieldset:
+  # attribute and non fieldset
+  - form: name="form1"
+  # attribute and empty fieldset
+  - form: name="form2"
+    fieldset:

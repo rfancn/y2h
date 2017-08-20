@@ -1,0 +1,23 @@
+elements:
+  - form: name="form_checkbox"
+    fieldset:
+      # no attribute, no items
+      - checkbox
+      # no attribute, multiple items but empty item
+      - checkbox:
+        items:
+          - item
+          - item
+      # with attribute, no items
+      - checkbox: name="checkbox1" help-label="checkbox label"
+      # with attribute, empty items
+      - checkbox: name="checkbox2" help-label="checkbox help label"
+        items:
+          - item:
+          - item:
+      # with attribute + normal items
+      - checkbox: name="checkbox2" help-label="消息加解密类型"
+        items:
+        - item: label="checkbox item1" v-model="method" value="clear" abc
+        - item: label="checkbox item2" v-model="method" value="compatible"
+        - item: label="checkbox item3" v-model="method" value="secure"
