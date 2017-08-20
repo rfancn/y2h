@@ -152,17 +152,12 @@ class BaseParser(object):
     def convert_valid_var_name(self, s):
         """ Convert a string to a valid python variable name"""
         # Remove invalid characters
-        s = re.sub('[^0-9a-zA-Z_]', '', s)
-        # Remove leading characters until we find a letter or underscore
-        s = re.sub('^[^a-zA-Z_]+', '', s)
-        return s
+        return re.sub('\W|^(?=\d)', '_', s)
 
     def specific_attrs_parse(self):
         for attr_name, attr_parse_func in self.specific_attrs.items():
-            # make sure attr_name is a valid variable name
-            valid_attr_name = self.convert_valid_var_name(attr_name)
-            # call specific attr parsing func
-            attr_parse_func(valid_attr_name)
+            # call specific attr parsing func with original_attr_name and valid_attr_name
+            attr_parse_func(attr_name)
 
     def post_parse(self):
         """
@@ -195,7 +190,11 @@ class BaseParser(object):
             if identifier:
                 help_label_dict['for'] = identifier
 
-        self._[spec_attr_name] = help_label_dict
+        # make sure we passed the valid attribute name
+        # because jinja2 will use valid variable name
+        # e,g: help-label will convert to help_label
+        valid_attr_name = self.convert_valid_var_name(spec_attr_name)
+        self._[valid_attr_name] = help_label_dict
 
     def parse_child_items(self, spec_attr_name):
         """ Parse child items for radio and checkbox element """
@@ -237,4 +236,8 @@ class BaseParser(object):
             # 3. append parsed item_attr_dict to parsed_items list
             paresed_items.append(new_item_attr_dict)
 
-        self._[spec_attr_name] = paresed_items
+        # make sure we passed the valid attribute name
+        # because jinja2 will use valid variable name
+        # e,g: help-label will convert to help_label
+        valid_attr_name = self.convert_valid_var_name(spec_attr_name)
+        self._[valid_attr_name] = paresed_items
