@@ -3,7 +3,8 @@ import sys
 from shlex import shlex
 
 class BaseParser(object):
-    def __init__(self, elem_type, elem_value):
+    def __init__(self, template, elem_type, elem_value):
+        self.template = template
         self.elem_type = elem_type
         self.elem_value = elem_value
 
@@ -57,7 +58,12 @@ class BaseParser(object):
             print("Empty att_str in parse_attr_str()")
             return {}
 
-        if not isinstance(attr_str, str):
+        if sys.version_info[0] == 3:
+            string_types = str
+        else:
+            string_types = basestring
+
+        if not isinstance(attr_str, string_types):
             print("Invalid attr_str while parsing:{0}".format(attr_str))
             return {}
 
@@ -131,7 +137,6 @@ class BaseParser(object):
         1. if elem_value is a string, then attribute is elem_value
         2. if elem_value is a dict, then attribute contains in elem_value[elem_type]
         """
-        #self.debug_elem_value()
 
         attr_str = None
         # if element type don't have attribute defined, no ':' after element name,
@@ -157,7 +162,8 @@ class BaseParser(object):
     def specific_attrs_parse(self):
         for attr_name, attr_parse_func in self.specific_attrs.items():
             # call specific attr parsing func with original_attr_name and valid_attr_name
-            attr_parse_func(attr_name)
+            if callable(attr_parse_func):
+                attr_parse_func(attr_name)
 
     def post_parse(self):
         """

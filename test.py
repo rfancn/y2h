@@ -7,6 +7,6 @@ if len(sys.argv)<2:
 
 ytoh = Yaml2Html()
 yaml_file = sys.argv[1]
-ytoh.read(yaml_file)
-html = ytoh.convert()
-print(html)
+if ytoh.read(yaml_file):
+    html = ytoh.convert()
+    print(html)

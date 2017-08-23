@@ -1,0 +1,58 @@
+{% if elem is not defined %}{% set elem = radio %}{% endif %}
+
+{% set help_label=elem.help_label %}
+
+{# when form_layout is horizontal #}
+{% if form_layout == 'horizontal' %}
+    <div class="form-group">
+        {% if help_label %}
+        <label class="col-sm-3 control-label">{{ help_label.innertext }}</label>
+        {% else %}
+        <div class="col-sm-3"></div>
+        {% endif %}
+
+        <div class="col-sm-9">
+            {% for item in elem['items'] %}
+            <div class="radio">
+                <label>
+                    {% if item.attribute %}
+                    <input type="radio" {{ item.attribute }}>{{ item.label }}
+                    {% else %}
+                    <input type="radio">{{ item.label }}
+                    {% endif %}
+                </label>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{# when form_layout is inline #}
+{% elif form_layout == 'inline' %}
+    <div class="form-group">
+        {% if help_label %}
+        <label class="control-label">{{ help_label.innertext }}</label>
+        {% endif %}
+
+        {% for item in elem.items() %}
+        <div class="radio">
+          <label>
+                <input type="radio" {{ item.attribute }}>{ item.label }}
+          </label>
+        </div>
+        {% endfor %}
+    </div>
+{# when form_layout is default #}
+{% else %}
+    <div class="form-group">
+        {% if help_label %}
+        <label class="control-label">{{ help_label.innertext }}</label>
+        {% endif %}
+
+        {% for item in elem.items() %}
+        <div class="radio">
+          <label>
+                <input type="radio" {{ item.attribute }}>{ item.label }}
+          </label>
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}

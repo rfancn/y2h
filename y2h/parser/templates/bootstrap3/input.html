@@ -1,0 +1,47 @@
+{% if elem is not defined %}{% set elem = input %}{% endif %}
+
+{% set help_label = elem.help_label %}
+
+{# when form_layout is horizontal #}
+{% if form_layout == 'horizontal' %}
+    <div class="form-group">
+        {% if help_label %}
+        <label class="col-sm-3 control-label" for="{{ help_label.for }}">{{ help_label.innertext }}</label>
+        {% else %}
+        <div class="col-sm-3"></div>
+        {% endif %}
+        <div class="col-sm-9">
+            {% if elem.attribute %}
+            <input class="form-control" {{ elem.attribute }}>
+            {% else %}
+            <input class="form-control">
+            {% endif %}
+        </div>
+    </div>
+{# when form_layout is inline #}
+{% elif form_layout == 'inline' %}
+    <div class="form-group">
+        {% if help_label %}
+        <label for="{{ help_label.for }}">{{ help_label.innertext }}</label>
+        {% endif %}
+
+        {% if elem.attribute %}
+        <input class="form-control" {{ elem.attribute }}>
+        {% else %}
+        <input class="form-control">
+        {% endif %}
+    </div>
+{# when form_layout is default #}
+{% else %}
+    <div class="form-group">
+        {% if help_label %}
+        <label for="{{ help_label.for }}">{{ help_label.innertext }}</label>
+        {% endif %}
+
+        {% if elem.attribute %}
+        <input class="form-control" {{ input.attribute }}>
+        {% else %}
+        <input class="form-control">
+        {% endif %}
+    </div>
+{% endif %}

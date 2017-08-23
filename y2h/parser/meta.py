@@ -8,15 +8,18 @@ DEFAULT_TEMPLATE = 'bootstrap3'
 class HtmlMeta(object):
     def __init__(self, jsonret):
         self.jsonret = jsonret
-        self.elements = self.parse_elements()
+
+        self.template = self.jsonret.get('template', DEFAULT_TEMPLATE)
         self.template_dir = self.get_template_dir()
+
+        self.elements = self.parse_elements()
 
     def parse_elements(self):
         parsed_elements = []
 
         elem_list = self.jsonret.get('elements', [])
         for elem in elem_list:
-            elem_parser = ElemParserFactory.create(elem)
+            elem_parser = ElemParserFactory.create(self.template, elem)
             if elem_parser:
                 elem_dict = elem_parser.parse()
                 parsed_elements.append(elem_dict)
@@ -24,15 +27,11 @@ class HtmlMeta(object):
         return parsed_elements
 
     def get_template_dir(self):
-        # get template and template_dir
-        template = self.jsonret.get('template', DEFAULT_TEMPLATE)
-        template_dir = os.path.join(
+        return os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
             "templates",
-            template
+            self.template
         )
-
-        return template_dir
 
 
 

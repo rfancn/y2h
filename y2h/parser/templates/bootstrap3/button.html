@@ -1,0 +1,9 @@
+{% if elem is not defined %}
+{% set elem= button %}
+{% endif %}
+
+{% if elem.attribute %}
+<button type="button" {{ elem.attribute }}>{{ elem.text }}</button>
+{% else %}
+<button type="button">{{ elem.text }}</button>
+{% endif %}

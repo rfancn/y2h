@@ -16,7 +16,7 @@ elements:
           - item:
           - item:
       # with attribute + normal items
-      - checkbox: name="checkbox2" help-label="消息加解密类型"
+      - checkbox: name="checkbox2" help-label="中文"
         items:
         - item: label="checkbox item1" v-model="method" value="clear" abc
         - item: label="checkbox item2" v-model="method" value="compatible"

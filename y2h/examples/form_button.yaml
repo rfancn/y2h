@@ -1,0 +1,4 @@
+elements:
+  - form:
+    fieldset:
+      - button: name="btn1" option="primary" size="small" text="button1"

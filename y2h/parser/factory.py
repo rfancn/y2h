@@ -1,6 +1,13 @@
 from importlib import import_module
 
-SUPPORTED_ELEMENT_TYPES =('form', 'input', 'radio', 'checkbox')
+
+DEFAULT_ELEMENT_TYPES = set(['form', 'input', 'radio', 'checkbox', 'button'])
+BOOTSTRAP3_ELEMENT_TYPES = DEFAULT_ELEMENT_TYPES | set(['panel'])
+
+SUPPORTED_ELEMENT_TYPES = {
+    'default': DEFAULT_ELEMENT_TYPES,
+    'bootstrap3': BOOTSTRAP3_ELEMENT_TYPES,
+}
 
 class ElemParserFactory(object):
     @classmethod
@@ -19,7 +26,7 @@ class ElemParserFactory(object):
         return getattr(module, parser_class_name, None)
 
     @classmethod
-    def guess_elem_type(cls, elem_value):
+    def guess_elem_type(cls, template, elem_value):
         """
         Try to identify element's type, e,g: form, input, radio...
         elem can be a string or dict
@@ -36,7 +43,8 @@ class ElemParserFactory(object):
             # e,g: elem is 'form'
             elem_type = elem_value
         elif isinstance(elem_value, dict):
-            for guess_type in SUPPORTED_ELEMENT_TYPES:
+            supported_element_types = SUPPORTED_ELEMENT_TYPES.get(template, DEFAULT_ELEMENT_TYPES)
+            for guess_type in supported_element_types:
                 if guess_type in elem_value.keys():
                     elem_type = guess_type
                     break
@@ -46,8 +54,8 @@ class ElemParserFactory(object):
         return elem_type
 
     @classmethod
-    def create(cls, elem_value):
-        elem_type = cls.guess_elem_type(elem_value)
+    def create(cls, template, elem_value):
+        elem_type = cls.guess_elem_type(template, elem_value)
         if not elem_type:
             return None
 
@@ -55,4 +63,4 @@ class ElemParserFactory(object):
         if not parser_class:
             return None
 
-        return parser_class(elem_type, elem_value)
+        return parser_class(template, elem_type, elem_value)

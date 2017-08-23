@@ -1,14 +1,12 @@
-{% set layout = form.layout %}
+{% if elem is not defined %}{% set elem = form %}{% endif %}
+{% set form_layout = elem.layout %}
 
-{% if form.attribute %}
-<form {{ form.attribute }}>
-{% else %}
-<form>
-{% endif %}
-{% for widget in form.fieldset %}
-    {% for elem_type, elem in widget.items() %}
-       {% with elem = elem %}
-            {% include layout+"/"+elem_type + ".html" %}
+{% if elem.attribute %}<form {{ elem.attribute }}>{% else %}<form>{% endif %}
+
+{% for child_elem in elem.fieldset %}
+    {% for elem_type, elem in child_elem.items() %}
+        {% with elem = elem %}
+            {% include elem_type + ".html" %}
         {% endwith %}
     {% endfor %}
 {% endfor %}

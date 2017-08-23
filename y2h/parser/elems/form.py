@@ -9,8 +9,8 @@ FORM_LAYOUTS = {
 }
 
 class FormParser(BaseParser):
-    def __init__(self, elem_type, elem_value):
-        super(FormParser, self).__init__(elem_type, elem_value)
+    def __init__(self, template, elem_type, elem_value):
+        super(FormParser, self).__init__(template, elem_type, elem_value)
         self.specific_attrs = {
             'layout': self.parse_form_layout,
             'fieldset' : self.parse_form_fieldset,
@@ -35,7 +35,7 @@ class FormParser(BaseParser):
         # fieldset may contains multiple elements
         form_elements = []
         for elem in form_fieldset:
-            parser = ElemParserFactory.create(elem)
+            parser = ElemParserFactory.create(self.template, elem)
             if parser:
                 # widget may contains multiple children
                 # e,g: radio widget may contains multiple item

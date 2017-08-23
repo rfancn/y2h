@@ -1,0 +1,9 @@
+elements:
+  - panel: type="primary"
+    body:
+      - form:
+        fieldset:
+          - input: name="input1"
+          - input: name="input2"
+    footer:
+      - button: name="button1" text="button1"

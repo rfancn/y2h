@@ -43,7 +43,7 @@ class Yaml2Html(object):
             print(ex)
             return False
 
-        return True 
+        return True
 
     def convert(self):
         htmlmeta = HtmlMeta(self.jsonret)
@@ -55,10 +55,11 @@ class Yaml2Html(object):
             lstrip_blocks=True,
         )
 
-        htmls = [] 
+        htmls = []
         for elem in htmlmeta.elements:
             for elem_name, elem_value in elem.items():
                 template = '{0}.html'.format(elem_name)
-                htmls.append(env.get_template(template).render(elem))
+                s = env.get_template(template).render(elem)
+                htmls.append(s)
 
         return ''.join(htmls) 
