@@ -1,4 +1,4 @@
-elements:
+html:
   - panel: type="primary"
     body:
       - form:

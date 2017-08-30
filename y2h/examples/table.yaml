@@ -1,4 +1,4 @@
-elements:
+html:
   - table
   - table:
     thead: []

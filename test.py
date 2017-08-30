@@ -8,5 +8,5 @@ if len(sys.argv)<2:
 ytoh = Yaml2Html()
 yaml_file = sys.argv[1]
 if ytoh.read(yaml_file):
-    html = ytoh.convert()
+    html, css, js = ytoh.convert()
     print(html)

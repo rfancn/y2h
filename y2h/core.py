@@ -45,7 +45,7 @@ class Yaml2Html(object):
 
         return True
 
-    def convert(self):
+    def get_html(self):
         htmlmeta = HtmlMeta(self.jsonret)
 
         env = Environment(
@@ -62,4 +62,11 @@ class Yaml2Html(object):
                 s = env.get_template(template).render(elem)
                 htmls.append(s)
 
-        return ''.join(htmls) 
+        return ''.join(htmls)
+
+    def convert(self):
+        html = self.get_html()
+        css = self.jsonret.get('css', None)
+        js = self.jsonret.get('javascript', None)
+
+        return (html, css, js)

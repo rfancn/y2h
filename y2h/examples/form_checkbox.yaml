@@ -1,4 +1,4 @@
-elements:
+html:
   - form: name="form_checkbox"
     fieldset:
       # no attribute, no items

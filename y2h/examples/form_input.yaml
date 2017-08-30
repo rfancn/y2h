@@ -1,4 +1,4 @@
-elements:
+html:
   - form: name="abc"
     fieldset:
       # simplest input without label

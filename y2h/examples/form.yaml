@@ -1,5 +1,5 @@
 template: bootstrap3
-elements:
+html:
   # non attribute and non fieldset
   - form
   # emtpy attribute and non fieldset

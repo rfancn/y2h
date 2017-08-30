@@ -3,6 +3,7 @@ import os
 from y2h.parser.base import BaseParser
 from y2h.parser.factory import ElemParserFactory
 
+ROOT_ELEMENT = 'html'
 DEFAULT_TEMPLATE = 'bootstrap3'
 
 class HtmlMeta(object):
@@ -17,7 +18,7 @@ class HtmlMeta(object):
     def parse_elements(self):
         parsed_elements = []
 
-        elem_list = self.jsonret.get('elements', [])
+        elem_list = self.jsonret.get(ROOT_ELEMENT, [])
         for elem in elem_list:
             elem_parser = ElemParserFactory.create(self.template, elem)
             if elem_parser:
