@@ -1,0 +1,26 @@
+{% if elem is not defined %}
+{% set elem = table %}
+{% endif %}
+
+<table {{ elem.attribute }}>
+{% if elem.thead %}
+    <thead>
+        <tr>
+            {% for th in elem.thead %}
+            <th>{{ th }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+{% endif %}
+{% if elem.tbody %}
+    <tbody>
+        {% for tr in elem.tbody %}
+        <tr>
+            {% for td in tr %}
+            <td>{{ td }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+{% endif %}
+</table>
