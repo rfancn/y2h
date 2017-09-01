@@ -1,6 +1,6 @@
 {% if elem is not defined %}{% set elem = checkbox %}{% endif %}
 
-{% set help_label=elem.label %}
+{% set help_label=elem.help_label %}
 
 {# when form_layout is horizontal #}
 {% if form_layout == 'horizontal' %}
@@ -13,7 +13,7 @@
 
         <div class="col-sm-9">
             {% for item in elem['items'] %}
-            <div class="checkbox">
+            <div {{ elem.attribute }}>
                 <label>
                     {% if item.attribute %}
                     <input type="checkbox" {{ item.attribute }}>{{ item.label }}
@@ -32,10 +32,10 @@
         <label class="control-label">{{ help_label.innertext }}</label>
         {% endif %}
 
-        {% for item in elem.items() %}
-        <div class="checkbox">
+        {% for item in elem['items'] %}
+        <div {{ elem.attribute }}>
             <label>
-                <input type="checkbox" {{ item.attribute }}>{ item.label }}
+                <input type="checkbox" {{ item.attribute }}>{{ item.label }}
             </label>
         </div>
         {% endfor %}
@@ -47,10 +47,10 @@
         <label class="control-label">{{ help_label.innertext }}</label>
         {% endif %}
 
-        {% for item in elem.items() %}
-        <div class="checkbox">
+        {% for item in elem['items'] %}
+        <div {{ elem.attribute }}>
             <label>
-                <input type="checkbox" {{ item.attribute }}>{ item.label }}
+                <input type="checkbox" {{ item.attribute }}>{{ item.label }}
             </label>
         </div>
         {% endfor %}

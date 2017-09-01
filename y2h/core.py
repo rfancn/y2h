@@ -21,12 +21,11 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import os
-from shlex import shlex
 import yaml
 from jinja2 import Environment, FileSystemLoader
-from y2h.parser.factory import ElemParserFactory
-from y2h.parser.meta import HtmlMeta
+
+from y2h.parser.html import HtmlHelper
+from y2h.parser.js import JavascriptHelper
 
 class Yaml2Html(object):
     def __init__(self):
@@ -46,17 +45,17 @@ class Yaml2Html(object):
         return True
 
     def get_html(self):
-        htmlmeta = HtmlMeta(self.jsonret)
+        html_helper = HtmlHelper(self.jsonret)
 
         env = Environment(
             autoescape=False,
-            loader=FileSystemLoader(htmlmeta.template_dir),
+            loader=FileSystemLoader(html_helper.template_dir),
             trim_blocks=True,
             lstrip_blocks=True,
         )
 
         htmls = []
-        for elem in htmlmeta.elements:
+        for elem in html_helper.elements:
             for elem_name, elem_value in elem.items():
                 template = '{0}.html'.format(elem_name)
                 s = env.get_template(template).render(elem)
@@ -64,9 +63,13 @@ class Yaml2Html(object):
 
         return ''.join(htmls)
 
+    def get_javascript(self):
+        js_helper = JavascriptHelper(self.jsonret)
+        return js_helper.js_content_list
+
     def convert(self):
         html = self.get_html()
         css = self.jsonret.get('css', None)
-        js = self.jsonret.get('javascript', None)
+        js = self.get_javascript()
 
         return (html, css, js)

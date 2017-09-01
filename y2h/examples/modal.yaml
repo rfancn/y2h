@@ -1,6 +1,6 @@
 html:
-  - panel: style="primary"
-    header: "Host Information"
+  - modal: id="mymodal"
+    header: "Modal Header"
     body:
       - form:
         fieldset:
@@ -8,5 +8,3 @@ html:
           - input: name="input2"
     footer:
       - button: name="button1" text="button1"
-    fieldset:
-      - table

@@ -1,5 +1,5 @@
 html:
-  - form: name="abc"
+  - form: name="abc" layout="inline"
     fieldset:
       # no attribute, no items
       - radio

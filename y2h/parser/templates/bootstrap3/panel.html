@@ -17,9 +17,24 @@
         {% endfor %}
     </div>
 {% endif %}
+{% if elem.fieldset %}
+    {% for child_elem in elem.fieldset %}
+        {% for elem_type, elem in child_elem.items() %}
+            {% with elem = elem %}
+                {% include elem_type + ".html" %}
+            {% endwith %}
+        {% endfor %}
+    {% endfor %}
+{% endif %}
 {% if elem.footer %}
     <div class="panel-footer">
-        {{ elem.footer }}
+        {% for child_elem in elem.footer %}
+            {% for elem_type, elem in child_elem.items() %}
+            {% with elem=elem %}
+                {% include elem_type + ".html" %}
+            {% endwith %}
+            {% endfor %}
+        {% endfor %}
     </div>
 {% endif %}
 </div>

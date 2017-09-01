@@ -2,7 +2,7 @@ from importlib import import_module
 
 
 DEFAULT_ELEMENT_TYPES = set(['form', 'input', 'radio', 'checkbox', 'button', 'table'])
-BOOTSTRAP3_ELEMENT_TYPES = DEFAULT_ELEMENT_TYPES | set(['panel'])
+BOOTSTRAP3_ELEMENT_TYPES = DEFAULT_ELEMENT_TYPES | set(['panel', 'modal'])
 
 SUPPORTED_ELEMENT_TYPES = {
     'default': DEFAULT_ELEMENT_TYPES,

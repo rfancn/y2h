@@ -13,7 +13,7 @@
 
         <div class="col-sm-9">
             {% for item in elem['items'] %}
-            <div class="radio">
+            <div {{ elem.attribute }}>
                 <label>
                     {% if item.attribute %}
                     <input type="radio" {{ item.attribute }}>{{ item.label }}
@@ -32,10 +32,10 @@
         <label class="control-label">{{ help_label.innertext }}</label>
         {% endif %}
 
-        {% for item in elem.items() %}
-        <div class="radio">
+        {% for item in elem['items'] %}
+        <div {{ elem.attribute }}>
           <label>
-                <input type="radio" {{ item.attribute }}>{ item.label }}
+                <input type="radio" {{ item.attribute }}>{{ item.label }}
           </label>
         </div>
         {% endfor %}
@@ -47,10 +47,10 @@
         <label class="control-label">{{ help_label.innertext }}</label>
         {% endif %}
 
-        {% for item in elem.items() %}
-        <div class="radio">
+        {% for item in elem['items'] %}
+        <div {{ elem.attribute }}>
           <label>
-                <input type="radio" {{ item.attribute }}>{ item.label }}
+                <input type="radio" {{ item.attribute }}>{{ item.label }}
           </label>
         </div>
         {% endfor %}

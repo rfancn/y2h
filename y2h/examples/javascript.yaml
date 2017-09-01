@@ -1,0 +1,23 @@
+javascript:
+  - script:
+      name: "jquery"
+      locale: cn
+  - script:
+      name: "jquery"
+      local: en
+  - script:
+      name: "jquery"
+      src: "/static/js/jquery.js"
+  - script:
+      name: "customized"
+      content: |
+        <script>console.log("hello");</script>
+  - script:
+      name: "datatables"
+      locale: cn
+      require: ["jquery"]
+
+
+
+
+

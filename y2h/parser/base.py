@@ -1,6 +1,5 @@
 import re
-import sys
-from shlex import shlex
+from y2h.parser.utils import parse_attr_str
 
 class BaseParser(object):
     def __init__(self, template, elem_type, elem_value):
@@ -48,57 +47,6 @@ class BaseParser(object):
         new_classes = original_classes - set(class_str.split())
         self.attr_dict['class'] = ' '.join(new_classes)
         return True
-
-    def parse_attr_str(self, attr_str):
-        """  parse attr string , it is key-value pairs from a shell-like text and returns a dict
-             sometimes, it could have single attribute, like: disabled, requied,
-             handle it specially and set None as single attribute's value
-        """
-        if not attr_str:
-            print("Empty att_str in parse_attr_str()")
-            return {}
-
-        if sys.version_info[0] == 3:
-            string_types = str
-        else:
-            string_types = basestring
-
-        if not isinstance(attr_str, string_types):
-            print("Invalid attr_str while parsing:{0}".format(attr_str))
-            return {}
-
-        # initialize a lexer, in POSIX mode (to properly handle escaping)
-        lexer = shlex(attr_str, posix=True)
-        # include '=' as a word character
-        # (this is done so that the lexer returns a list of key-value pairs)
-        # (if your option key or value contains any unquoted special character, you will need to add it here)
-        lexer.wordchars += "="
-        # make sure attribute support 'data-parsley-length' attribute name
-        lexer.wordchars += "-"
-        # then we separate option keys and values to build the resulting dictionary
-        # (maxsplit is required to make sure that '=' in value will not be a problem)
-        # sometimes as HTML will has some key like attribute without value, like: 'required', 'disabled'...
-        # it need extract those single attribute from the string
-        pairs_attrs = []
-        single_attrs = []
-        for word in lexer:
-            if "=" in word:
-                # str.split() changed 'maxsplit' to keyword arguments
-                # see: https://docs.python.org/3.3/library/stdtypes.html#str.split
-                if sys.version_info >= (3,3):
-                    pairs_attrs.append(word.split("=", maxsplit=1))
-                else:
-                    pairs_attrs.append(word.split("=", 1))
-            else:
-                single_attrs.append(word)
-
-        # convert pairs attribute list to dict
-        pairs_attr_dict = dict(pairs_attrs)
-        # add single atrribute to dict
-        for attr in single_attrs:
-            pairs_attr_dict[attr] = None
-
-        return pairs_attr_dict
 
     def process_attribute_dict(self, attr_dict, remove_list=[]):
         """
@@ -152,7 +100,7 @@ class BaseParser(object):
             raise ValueError("Invalid element definition in pre_parse()!")
 
         if attr_str:
-            self.attr_dict = self.parse_attr_str(attr_str)
+            self.attr_dict = parse_attr_str(attr_str)
 
     def convert_valid_var_name(self, s):
         """ Convert a string to a valid python variable name"""
@@ -220,7 +168,7 @@ class BaseParser(object):
             item_attr_dict = {}
             if isinstance(item, dict):
                 item_attr_str = item.get('item', None)
-                item_attr_dict = self.parse_attr_str(item_attr_str)
+                item_attr_dict = parse_attr_str(item_attr_str)
 
             # Append item attributes that not appears in parent radio attribute
             new_item_attr_dict = self.attr_dict.copy()

@@ -1,4 +1,40 @@
 html:
-  - form
-  - button
-  - img
+  - panel: style="primary"
+    header: "test"
+    body:
+      - form: id="form-host" data-parsley-validate="" novalidate=""
+        fieldset:
+          - input: >
+                 help-label="Server Hostname/IP" name="host" placeholder="host"  required
+                 data-parsley-type="num" data-parsley-trigger="focusout" v-model="srv.host"
+          - input: >
+                 help-label="SSH Username" name="user" placeholder="SSH User" required
+                 data-parsley-trigger="focusout" v-model="srv.username"
+          - input: >
+                 help-label="SSH Password" name="port" placeholder="SSH port"  required
+                 data-parsley-trigger="focusout" v-model="srv.password"
+          - input: >
+                help-label="SSH port" name="port" placeholder="SSH port" required
+                 data-parsley-type="num" data-parsley-trigger="focusout" v-model="srv.port"
+          - button: id="host-add" text="Add Host" style="primary"
+          
+  - panel: style="success"
+    header: Current Server Information
+    fieldset:
+      - table: id="table-servers" style="bordered"
+        thead: ["host", "username", "port", "role"]
+# javascript part
+javascript:
+  - cdn: name="datatables" ver=1.9 file="datatable.min.js"
+  - external: src="/static/js/test.js"
+  - inline: |
+      var t = $('#table-servers').DataTable();
+      function init_datatable(){
+          $('#host-add').on( 'click', function () {
+              t.row.add( [
+                  srv.host,
+                  srv.username,
+                  srv.port,
+              ] ).draw( false );
+          });
+      }

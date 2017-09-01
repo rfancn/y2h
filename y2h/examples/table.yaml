@@ -10,3 +10,7 @@ html:
     tbody:
       - [1, 'ryan', 'changsha' ]
       - [2, 'chen', 'chengdu' ]
+javascript: local="cn"
+  requires:
+  script:
+

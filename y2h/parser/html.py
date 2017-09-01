@@ -6,7 +6,7 @@ from y2h.parser.factory import ElemParserFactory
 ROOT_ELEMENT = 'html'
 DEFAULT_TEMPLATE = 'bootstrap3'
 
-class HtmlMeta(object):
+class HtmlHelper(object):
     def __init__(self, jsonret):
         self.jsonret = jsonret
 

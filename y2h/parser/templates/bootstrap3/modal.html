@@ -1,0 +1,38 @@
+{% if elem is not defined %}
+{% set elem = modal %}
+{% endif %}
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" {{ elem.attribute }}>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      {% if elem.header %}
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{ elem.header }}</h4>
+      </div>
+      {% endif %}
+      {% if elem.body %}
+      <div class="modal-body">
+            {% for child_elem in elem.body %}
+                {% for elem_type, elem in child_elem.items() %}
+                {% with elem=elem %}
+                    {% include elem_type + ".html" %}
+                {% endwith %}
+                {% endfor %}
+            {% endfor %}
+      </div>
+      {% endif %}
+      {% if elem.footer %}
+      <div class="modal-footer">
+            {% for child_elem in elem.footer %}
+                {% for elem_type, elem in child_elem.items() %}
+                {% with elem=elem %}
+                    {% include elem_type + ".html" %}
+                {% endwith %}
+                {% endfor %}
+            {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
