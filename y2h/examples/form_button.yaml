@@ -1,4 +1,4 @@
 html:
   - form:
     fieldset:
-      - button: name="btn1" option="primary" size="small" text="button1"
+      - button: name="btn1" text="button1" button-style="primary" size="small"

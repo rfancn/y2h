@@ -1,5 +1,5 @@
 html:
-  - panel: style="primary"
+  - panel: panel-style="primary"
     header: "test"
     body:
       - form: id="form-host" data-parsley-validate="" novalidate=""
@@ -17,15 +17,14 @@ html:
                 help-label="SSH port" name="port" placeholder="SSH port" required
                  data-parsley-type="num" data-parsley-trigger="focusout" v-model="srv.port"
           - button: id="host-add" text="Add Host" style="primary"
-          
-  - panel: style="success"
+  - panel: panel-style="success"
     header: Current Server Information
     fieldset:
-      - table: id="table-servers" style="bordered"
+      - table: id="table-servers" table-style="bordered"
         thead: ["host", "username", "port", "role"]
 # javascript part
 javascript:
-  - cdn: name="datatables" ver=1.9 file="datatable.min.js"
+  - cdn: category="datatables" ver=1.9 file="datatable.min.js"
   - external: src="/static/js/test.js"
   - inline: |
       var t = $('#table-servers').DataTable();

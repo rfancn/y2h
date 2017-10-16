@@ -1,23 +1,7 @@
 javascript:
-  - script:
-      name: "jquery"
-      locale: cn
-  - script:
-      name: "jquery"
-      local: en
-  - script:
-      name: "jquery"
-      src: "/static/js/jquery.js"
-  - script:
-      name: "customized"
-      content: |
-        <script>console.log("hello");</script>
-  - script:
-      name: "datatables"
-      locale: cn
-      require: ["jquery"]
-
-
-
-
-
+  - cdn: category="datatables" ver="1.10.15" file="js/jquery.dataTables.min.js"
+  - external: src="https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js"
+  - inline: |
+      function helloworld(){
+        console.log("hello world!");
+      };

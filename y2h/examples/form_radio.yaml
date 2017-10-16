@@ -4,7 +4,7 @@ html:
       # no attribute, no items
       - radio
       # no attribute, multiple items but empty item
-      - radio:
+      - radio: radio-style="inline"
         items:
           - item
           - item

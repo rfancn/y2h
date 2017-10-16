@@ -21,7 +21,7 @@ class ButtonParser(BaseParser):
     def __init__(self, template, elem_type, elem_value):
         super(ButtonParser, self).__init__(template, elem_type, elem_value)
         self.specific_attrs = {
-            'style': self.parse_button_style,
+            'button-style': self.parse_button_style,
             'size': self.parse_button_size,
             # no specific parse func, defined here to make sure it will not show in attribute string
             'text': self.pares_button_text,

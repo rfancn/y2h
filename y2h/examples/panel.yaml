@@ -1,5 +1,5 @@
 html:
-  - panel: style="primary"
+  - panel: panel-style="primary"
     header: "Host Information"
     body:
       - form:

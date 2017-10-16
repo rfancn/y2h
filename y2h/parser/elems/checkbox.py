@@ -18,7 +18,7 @@ class CheckboxParser(BaseParser):
         super(CheckboxParser, self).pre_parse()
 
         # handling 'style' keyword
-        KEYWORD_STYLE = 'style'
+        KEYWORD_STYLE = 'checkbox-style'
         checkbox_style = self.attr_dict.get(KEYWORD_STYLE, 'default')
         checkbox_class = CHECKBOX_STYLE_CLASSES.get(checkbox_style, CHECKBOX_STYLE_CLASSES['default'])
         self.add_class(checkbox_class)

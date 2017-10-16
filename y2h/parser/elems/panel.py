@@ -25,7 +25,7 @@ class PanelParser(BaseParser):
         super(PanelParser, self).pre_parse()
 
         # handling 'style' keyword
-        KEYWORD_STYLE = 'style'
+        KEYWORD_STYLE = 'panel-style'
         panel_style = self.attr_dict.get(KEYWORD_STYLE, 'default')
         panel_class = PANEL_STYLE_CLASSES.get(panel_style, PANEL_STYLE_CLASSES['default'])
         self.add_class(panel_class)

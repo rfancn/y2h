@@ -18,7 +18,7 @@ class RadioParser(BaseParser):
         super(RadioParser, self).pre_parse()
 
         # handling 'style' keyword
-        KEYWORD_STYLE = 'style'
+        KEYWORD_STYLE = 'radio-style'
         radio_style = self.attr_dict.get(KEYWORD_STYLE, 'default')
         radio_class = RADIO_STYLE_CLASSES.get(radio_style, RADIO_STYLE_CLASSES['default'])
         self.add_class(radio_class)

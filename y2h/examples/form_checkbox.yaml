@@ -9,7 +9,7 @@ html:
           - item
           - item
       # with attribute, no items
-      - checkbox: name="checkbox1" help-label="checkbox label"
+      - checkbox: name="checkbox1" help-label="checkbox label" checkbox-style="inline"
       # with attribute, empty items
       - checkbox: name="checkbox2" help-label="checkbox help label"
         items:

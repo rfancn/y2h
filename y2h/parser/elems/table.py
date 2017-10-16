@@ -24,7 +24,7 @@ class TableParser(BaseParser):
         super(TableParser, self).pre_parse()
 
         # handle keyword 'style'
-        KEYWORD_STYLE = 'style'
+        KEYWORD_STYLE = 'table-style'
         table_style = self.attr_dict.get(KEYWORD_STYLE, 'default')
         table_class = TABLE_STYLE_CLASSES.get(table_style, TABLE_STYLE_CLASSES['default'])
         self.add_class(table_class)
