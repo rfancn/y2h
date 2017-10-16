@@ -2,8 +2,8 @@ from y2h.parser.utils import parse_attr_str
 
 EXTERNAL_JS = '<script src={url}></script>'
 
-BOOTCSS_URL_FORMART = 'https://cdn.bootcss.com/{name}/{ver}/{file}'
-CLOUDFLARE_URL_FORMAT = 'https://cdnjs.cloudflare.com/ajax/libs/{name}/{ver}/{file}'
+BOOTCSS_URL_FORMART = 'https://cdn.bootcss.com/{category}/{ver}/{file}'
+CLOUDFLARE_URL_FORMAT = 'https://cdnjs.cloudflare.com/ajax/libs/{category}/{ver}/{file}'
 
 LOCALE_CDN = {
     'cn': BOOTCSS_URL_FORMART,
@@ -37,7 +37,7 @@ class JavascriptHelper(object):
     def get_js_content(self, js_key, js_value):
         content = None
         if js_key == 'cdn':
-            js_dict = self.get_js_value_dict(js_value, requires=['name', 'ver', 'file'])
+            js_dict = self.get_js_value_dict(js_value, requires=['category', 'ver', 'file'])
             content = self.get_cdn_content(js_dict)
         elif js_key == 'external':
             js_dict = self.get_js_value_dict(js_value, requires=['src'])
@@ -53,8 +53,8 @@ class JavascriptHelper(object):
     def get_js_value_dict(self, js_value, requires=[]):
         # Firstly, we assume js_value is a dict type
         # If it is a string, then try to convert js_value string to js_dict dict type
-        # e,g: name="datatables" ver=1.9 file="datatable.min.js"
-        # {'name':'datatables', 'ver':1.9, 'file':'datatable.min.js'}
+        # e,g: category="select" ver=1.9 file="datatable.min.js"
+        # {'category':'select', 'ver':1.9, 'file':'datatable.min.js'}
         js_dict = js_value
         if isinstance(js_value, str):
             js_dict = parse_attr_str(js_value)
@@ -73,7 +73,7 @@ class JavascriptHelper(object):
         """ Return type is a dict, key is js content type, value is real content"""
         js_locale = js_dict.get('locale', DEFAULT_LOCALE)
         js_cdn_template = LOCALE_CDN.get(js_locale, LOCALE_CDN[DEFAULT_LOCALE])
-        js_url = js_cdn_template.format(name=js_dict['name'], ver=js_dict['ver'], file=js_dict['file'])
+        js_url = js_cdn_template.format(category=js_dict['category'], ver=js_dict['ver'], file=js_dict['file'])
         return ('external', EXTERNAL_JS.format(url=js_url))
 
     def get_external_content(self, js_dict):
