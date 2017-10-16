@@ -1,5 +1,7 @@
 # y2h
-y2h stands for: YAML to HTML, it aims to help translate YAML to HTML based on different templates.It doesn't want to be a complete functional HTML generator,  in most of time, it used as form component builder by only define some few lines. There is a golang implementation of y2h here too: [go-y2h]("https://github.com/rfancn/go-y2h/")
+y2h stands for: YAML to HTML.
+
+It aims to help translate YAML to HTML based on different templates. It doesn't want to be a complete functional HTML generator,  in most of time, it used as form component builder by only define some few lines. There is a golang implementation of y2h here too: [go-y2h](https://github.com/rfancn/go-y2h/)
 
 ### Introduction
 Four item which can affect the translating of HTML can be defined in YAML document:
