@@ -1,4 +1,4 @@
-# go-y2h
+# y2h
 y2h stands for: YAML to HTML, it aims to help translate YAML to HTML based on different templates.
 It doesn't want to be a complete functional HTML generator, 
 in most of time, it used as form component builder by only define some few lines.
